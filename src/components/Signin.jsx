@@ -57,7 +57,7 @@ function Signin() {
             href="#"
             className="flex items-center justify-center bg-[#276ef1] px-8 py-4 text-center font-semibold rounded-md text-white transition [box-shadow:rgb(171,_196,_245)_-8px_8px] hover:[box-shadow:rgb(171,_196,_245)_0px_0px]"
           >
-            <p className="mr-6 font-bold">Login to One Body</p>
+            <p className="mr-6 font-bold">Sign in</p>
             <svg
               className="h-4 w-4 flex-none"
               fill="currentColor"
