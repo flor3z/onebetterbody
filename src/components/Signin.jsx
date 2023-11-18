@@ -1,7 +1,29 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+import { UserAuth } from '../context/AuthContext';
 
 function Signin() {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+
+  const { signInUser } = UserAuth();
+
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError('');
+    try {
+      await signInUser(email, password);
+      navigate('/account');
+    } catch (e) {
+      setError(e.message);
+      console.log(e.message);
+    }
+  };
+
   return (
     <div className="flex flex-col items-center justify-center bg-[#f2f2f7] h-screen">
       <div className="max-w-lg px-5 py-16 text-center md:px-10 md:py-24 lg:py-32">
@@ -9,6 +31,7 @@ function Signin() {
           One Body
         </h2>
         <form
+          onSubmit={handleSubmit}
           className="mx-auto mb-4 max-w-sm pb-4"
           name="wf-form-password"
           method="get"
@@ -20,6 +43,7 @@ function Signin() {
               className="absolute bottom-0 left-[5%] right-auto top-[26%] inline-block"
             />
             <input
+              onChange={(e) => setEmail(e.target.value)}
               type="email"
               className="mb-4 block h-9 w-full border border-black bg-[#f2f2f7] px-3 py-6 pl-14 text-sm text-[#333333]"
               maxLength="256"
@@ -35,6 +59,7 @@ function Signin() {
               className="absolute bottom-0 left-[5%] right-auto top-[26%] inline-block"
             />
             <input
+              onChange={(e) => setPassword(e.target.value)}
               type="password"
               className="mb-4 block h-9 w-full border border-black bg-[#f2f2f7] px-3 py-6 pl-14 text-sm text-[#333333]"
               placeholder="Password (min 4 characters)"
@@ -53,10 +78,7 @@ function Signin() {
               </a>
             </span>
           </label>
-          <a
-            href="#"
-            className="flex items-center justify-center bg-[#276ef1] px-8 py-4 text-center font-semibold rounded-md text-white transition [box-shadow:rgb(171,_196,_245)_-8px_8px] hover:[box-shadow:rgb(171,_196,_245)_0px_0px]"
-          >
+          <button className="flex items-center justify-center bg-[#276ef1] px-8 py-4 text-center font-semibold rounded-md text-white transition [box-shadow:rgb(171,_196,_245)_-8px_8px] hover:[box-shadow:rgb(171,_196,_245)_0px_0px]">
             <p className="mr-6 font-bold">Sign in</p>
             <svg
               className="h-4 w-4 flex-none"
@@ -67,7 +89,7 @@ function Signin() {
               <title>Arrow Right</title>
               <polygon points="16.172 9 10.101 2.929 11.515 1.515 20 10 19.293 10.707 11.515 18.485 10.101 17.071 16.172 11 0 11 0 9"></polygon>
             </svg>
-          </a>
+          </button>
         </form>
         <p className="text-sm text-[#636262]">
           Dont have an account?{' '}
