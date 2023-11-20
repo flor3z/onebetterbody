@@ -1,9 +1,21 @@
 import { useNavigate } from 'react-router-dom';
 import { UserAuth } from '../context/AuthContext';
-
+import { useState } from 'react';
 import React from 'react';
 
 function Account() {
+  const [weight, setWeight] = useState('');
+  const [height, setHeight] = useState('');
+  const [result, setResult] = useState('');
+
+  const handleSubmitResult = (e) => {
+    e.preventDefault();
+    const heightSquared = height * height;
+    setResult(weight / heightSquared);
+    setHeight('');
+    setWeight('');
+  };
+
   const { user, logout } = UserAuth();
 
   const navigate = useNavigate();
@@ -11,7 +23,7 @@ function Account() {
   const handleLogOut = async () => {
     try {
       await logout();
-      navigate('/');
+      navigate('/signin');
     } catch (e) {
       console.log(e.message);
     }
@@ -45,7 +57,9 @@ function Account() {
                 <p className="text-sm font-bold sm:text-base">1</p>
               </div>
               <div className="ml-4 flex flex-col gap-2">
-                <h5 className="text-xl font-bold">Find Component</h5>
+                <h5 className="text-xl font-bold">
+                  BMI Rating : {Math.round(result)}{' '}
+                </h5>
                 <p className="text-sm text-[#636262]">
                   Lorem ipsum dolor sit amet consectetur adipiscing elit ut
                   aliquam, purus sit.
@@ -83,29 +97,43 @@ function Account() {
               </div>
             </a>
           </div>
-          <form className="block h-full w-full overflow-hidden [grid-area:1/1/2/2] lg:[grid-area:1/1/2/2]">
-            <div className="flex flex-col items-start p-4 text-left bg-slate-400 w-full h-full rounded-md shadow-md">
-              <label>Weight in Kilograms</label>
-              <input type="text" placeholder="input weight here" />
-              <label>Height in Meters</label>
-              <input type="text" placeholder="input height here" />
-              <button
-                href="#"
-                className="flex items-center justify-center bg-[#276ef1] px-8 py-4 text-center font-semibold rounded-md text-white"
-              >
-                <p className="mr-6 font-bold">Submit</p>
-                <svg
-                  className="h-4 w-4 flex-none"
-                  fill="currentColor"
-                  viewBox="0 0 20 21"
-                  xmlns="http://www.w3.org/2000/svg"
+          <div className="block w-auto h-auto md:h-full md:w-full overflow-hidden [grid-area:1/1/2/2] lg:[grid-area:1/1/2/2] rounded-xl border border-solid border-[#cdcdcd]">
+            <form onSubmit={handleSubmitResult}>
+              <div className="flex flex-col items-center p-4 text-left ">
+                <label>Weight in Kilograms</label>
+                <input
+                  className="mb-4 block h-9 w-full border border-black bg-[#f2f2f7] px-3 py-6 pl-14 text-sm text-[#333333]"
+                  onChange={(e) => setWeight(e.target.value)}
+                  value={weight}
+                  type="number"
+                  placeholder="input weight here"
+                />
+                <label>Height in Meters</label>
+                <input
+                  className="mb-4 block h-9 w-full border border-black bg-[#f2f2f7] px-3 py-6 pl-14 text-sm text-[#333333]"
+                  onChange={(e) => setHeight(e.target.value)}
+                  value={height}
+                  type="number"
+                  placeholder="input height here"
+                />
+                <button
+                  href="#"
+                  className="flex items-center justify-center bg-[#276ef1] px-8 py-4 text-center font-semibold rounded-md text-white"
                 >
-                  <title>Arrow Right</title>
-                  <polygon points="16.172 9 10.101 2.929 11.515 1.515 20 10 19.293 10.707 11.515 18.485 10.101 17.071 16.172 11 0 11 0 9"></polygon>
-                </svg>
-              </button>
-            </div>
-          </form>
+                  <p className="mr-6 font-bold">Submit</p>
+                  <svg
+                    className="h-4 w-4 flex-none"
+                    fill="currentColor"
+                    viewBox="0 0 20 21"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <title>Arrow Right</title>
+                    <polygon points="16.172 9 10.101 2.929 11.515 1.515 20 10 19.293 10.707 11.515 18.485 10.101 17.071 16.172 11 0 11 0 9"></polygon>
+                  </svg>
+                </button>
+              </div>
+            </form>
+          </div>
         </div>
         <div className="flex justify-center items-center text-sm py-4">
           <button
