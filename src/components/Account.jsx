@@ -15,6 +15,17 @@ function Account() {
     setHeight('');
     setWeight('');
   };
+  // colour condition for BMI range//
+  let colour;
+  if (result < 18.5) {
+    colour = 'text-red-500';
+  } else if (result >= 18.5 && result <= 24.9) {
+    colour = 'text-green-500';
+  } else if (result >= 25 && result <= 29.9) {
+    colour = 'text-orange-500';
+  } else {
+    colour = 'text-red-500';
+  }
 
   const { user, logout } = UserAuth();
 
@@ -57,8 +68,12 @@ function Account() {
                 <p className="text-sm font-bold sm:text-base">1</p>
               </div>
               <div className="ml-4 flex flex-col gap-2">
-                <h5 className="text-xl font-bold">
-                  BMI Rating : {Math.round(result)}{' '}
+                <h5
+                  className={
+                    result ? `text-xl font-bold ${colour}` : 'text-xl font-bold'
+                  }
+                >
+                  BMI Rating : {result && Math.round(result)}{' '}
                 </h5>
                 <p className="text-sm text-[#636262]">
                   Lorem ipsum dolor sit amet consectetur adipiscing elit ut
@@ -105,16 +120,20 @@ function Account() {
                   className="mb-4 block h-9 w-full border border-black bg-[#f2f2f7] px-3 py-6 pl-14 text-sm text-[#333333]"
                   onChange={(e) => setWeight(e.target.value)}
                   value={weight}
+                  step=".1"
                   type="number"
                   placeholder="input weight here"
+                  required
                 />
                 <label>Height in Meters</label>
                 <input
-                  className="mb-4 block h-9 w-full border border-black bg-[#f2f2f7] px-3 py-6 pl-14 text-sm text-[#333333]"
+                  className=" mb-4 block h-9 w-full border border-black bg-[#f2f2f7] px-3 py-6 pl-14 text-sm text-[#333333]"
                   onChange={(e) => setHeight(e.target.value)}
                   value={height}
+                  step=".01"
                   type="number"
                   placeholder="input height here"
+                  required
                 />
                 <button
                   href="#"

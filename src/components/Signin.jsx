@@ -66,18 +66,14 @@ function Signin() {
               required=""
             />
           </div>
-          <label className="mb-6 flex items-center pb-12 font-medium lg:mb-1">
-            <input type="checkbox" name="checkbox" />
-            <span
-              className="ml-4 inline-block cursor-pointer text-sm"
-              htmlFor="checkbox"
-            >
-              I agree with the{' '}
-              <a href="#" className="font-bold text-[#0b0b1f]">
-                Terms &amp; Conditions
-              </a>
-            </span>
-          </label>
+          {error ? (
+            <div className="flex items-center pb-4 font-medium">
+              <span className=" inline-block cursor-pointer text-sm">
+                {error && <p className="text-red-500 font-bold">{error}</p>}
+              </span>
+            </div>
+          ) : null}
+
           <button className="flex items-center justify-center bg-[#276ef1] px-8 py-4 text-center font-semibold rounded-md text-white transition [box-shadow:rgb(171,_196,_245)_-8px_8px] hover:[box-shadow:rgb(171,_196,_245)_0px_0px]">
             <p className="mr-6 font-bold">Sign in</p>
             <svg
