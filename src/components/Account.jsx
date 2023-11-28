@@ -1,31 +1,13 @@
 import { useNavigate } from 'react-router-dom';
 import { UserAuth } from '../context/AuthContext';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import React from 'react';
 
 function Account() {
   const [weight, setWeight] = useState('');
   const [height, setHeight] = useState('');
   const [result, setResult] = useState('');
-
-  const handleSubmitResult = (e) => {
-    e.preventDefault();
-    const heightSquared = height * height;
-    setResult(weight / heightSquared);
-    setHeight('');
-    setWeight('');
-  };
-  // colour condition for BMI range//
-  let colour;
-  if (result < 18.5) {
-    colour = 'text-red-500';
-  } else if (result >= 18.5 && result <= 24.9) {
-    colour = 'text-green-500';
-  } else if (result >= 25 && result <= 29.9) {
-    colour = 'text-orange-500';
-  } else {
-    colour = 'text-red-500';
-  }
+  const [bmiInfo, setBmiInfo] = useState({});
 
   const { user, logout } = UserAuth();
 
@@ -39,6 +21,80 @@ function Account() {
       console.log(e.message);
     }
   };
+
+  const handleSubmitResult = (e) => {
+    e.preventDefault();
+    const heightSquared = height * height;
+    setResult(weight / heightSquared);
+    setHeight('');
+    setWeight('');
+  };
+
+  const bmiResults = [
+    {
+      category: 'under weight',
+      colour: 'text-red-500',
+      info: 'You may be dealing with malnutrition, seek dietary assistance.',
+    },
+    {
+      category: 'healthy weight',
+      colour: 'text-green-500',
+      info: 'You are currently at a healthy weight, keep up the good work.',
+    },
+    {
+      category: 'over weight',
+      colour: 'text-orange-500',
+      info: 'You may need to seek guidance regarding small dietary adjustments.',
+    },
+    {
+      category: 'obese',
+      colour: 'text-red-500',
+      info: 'You may need to seek medical support as your bmi level indicates a high risk of disease and health concerns.',
+    },
+  ];
+
+  //1. Once result has been returned e.g 20 bmi store that information
+  // result stored in state variable
+  //2. Create conditional statement comparing result to a range of numbers,
+  // if (result < 18.5 ) {
+  // setBmiInfo(bmiResults[0])
+  //      }
+  //3. Once info has been selected, display data on screen
+  // <h1>{bmiInfo.colour}</h1>
+
+  useEffect(() => {
+    const totalInfo = () => {
+      if (result < 18.5) {
+        return setBmiInfo(bmiResults[0]);
+      } else if (result >= 18.5 && result <= 24.9) {
+        return setBmiInfo(bmiResults[1]);
+      } else if (result >= 25 && result <= 29.9) {
+        return setBmiInfo(bmiResults[2]);
+      } else {
+        return setBmiInfo(bmiResults[3]);
+      }
+    };
+
+    console.log(bmiInfo);
+    console.log(result);
+    return () => {
+      totalInfo();
+    };
+  }, [result]);
+
+  //contiune here with finding out how to display data without constant re-renders
+
+  // colour condition for BMI range//
+  // let colour;
+  // if (result < 18.5) {
+  //   colour = 'text-red-500';
+  // } else if (result >= 18.5 && result <= 24.9) {
+  //   colour = 'text-green-500';
+  // } else if (result >= 25 && result <= 29.9) {
+  //   colour = 'text-orange-500';
+  // } else {
+  //   colour = 'text-red-500';
+  // }
 
   return (
     <section>
@@ -69,9 +125,9 @@ function Account() {
               </div>
               <div className="ml-4 flex flex-col gap-2">
                 <h5
-                  className={
-                    result ? `text-xl font-bold ${colour}` : 'text-xl font-bold'
-                  }
+                // className={
+                //   result ? `text-xl font-bold ${colour}` : 'text-xl font-bold'
+                // }
                 >
                   BMI Rating : {result && Math.round(result)}{' '}
                 </h5>
@@ -89,7 +145,10 @@ function Account() {
                 <p className="text-sm font-bold sm:text-base">2</p>
               </div>
               <div className="ml-4 flex flex-col gap-2">
-                <h5 className="text-xl font-bold">Copy and Paste</h5>
+                <h5 className="text-xl font-bold">
+                  {/* constant looping here, not sure why...maybe b/c function is called over and over */}
+                  Weight Classification:
+                </h5>
                 <p className="text-sm text-[#636262]">
                   Lorem ipsum dolor sit amet consectetur adipiscing elit ut
                   aliquam, purus sit.
@@ -104,7 +163,7 @@ function Account() {
                 <p className="text-sm font-bold sm:text-base">3</p>
               </div>
               <div className="ml-4 flex flex-col gap-2">
-                <h5 className="text-xl font-bold">Done</h5>
+                <h5 className="text-xl font-bold">Description</h5>
                 <p className="text-sm text-[#636262]">
                   Lorem ipsum dolor sit amet consectetur adipiscing elit ut
                   aliquam, purus sit.
@@ -137,9 +196,9 @@ function Account() {
                 />
                 <button
                   href="#"
-                  className="flex items-center justify-center bg-[#276ef1] px-8 py-4 text-center font-semibold rounded-md text-white"
+                  className="flex items-center justify-center hover:bg-[#277ef1] bg-[#276ef1] px-8 py-4 text-center font-semibold rounded-md text-white"
                 >
-                  <p className="mr-6 font-bold">Submit</p>
+                  <p className="mr-6 font-bold tracking-wider">Submit</p>
                   <svg
                     className="h-4 w-4 flex-none"
                     fill="currentColor"
@@ -157,9 +216,9 @@ function Account() {
         <div className="flex justify-center items-center text-sm py-4">
           <button
             onClick={handleLogOut}
-            className="flex items-center justify-center bg-[#276ef1] px-8 py-4 text-center font-semibold rounded-md text-white"
+            className="flex items-center justify-center hover:bg-[#277ef1] bg-[#276ef1] px-8 py-4 text-center font-semibold rounded-md text-white"
           >
-            <p className=" font-bold">Sign Out</p>
+            <p className="font-bold tracking-wider ">Sign Out</p>
           </button>
           {/* Log out of{' '}
           <Link to="signin" className="text-sm font-bold text-balck">
