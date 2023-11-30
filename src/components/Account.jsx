@@ -32,22 +32,22 @@ function Account() {
 
   const bmiResults = [
     {
-      category: 'under weight',
+      category: 'Under Weight',
       colour: 'text-red-500',
       info: 'You may be dealing with malnutrition, seek dietary assistance.',
     },
     {
-      category: 'healthy weight',
+      category: 'Healthy Weight',
       colour: 'text-green-500',
       info: 'You are currently at a healthy weight, keep up the good work.',
     },
     {
-      category: 'over weight',
+      category: 'Over Weight',
       colour: 'text-orange-500',
       info: 'You may need to seek guidance regarding small dietary adjustments.',
     },
     {
-      category: 'obese',
+      category: 'Obese',
       colour: 'text-red-500',
       info: 'You may need to seek medical support as your bmi level indicates a high risk of disease and health concerns.',
     },
@@ -75,7 +75,7 @@ function Account() {
       }
     };
 
-    console.log(bmiInfo);
+    console.log(bmiInfo.info);
     console.log(result);
     return () => {
       totalInfo();
@@ -98,8 +98,18 @@ function Account() {
 
   return (
     <section>
-      <div className="absolute top-2 left-3">
-        Welcome : {user && user.email}{' '}
+      <div className="flex justify-between">
+        <div className="py-4 text-black font-semibold pl-5 sm:pl-10 underline decoration-[#276ef1] hover:decoration-[#277ef1] hover:decoration-2  underline-offset-2 ">
+          User: {user && user.email}
+        </div>
+        <div className="flex justify-center items-center py-4 pr-5 sm:pr-10">
+          <button
+            onClick={handleLogOut}
+            className="flex text-black items-center justify-center text-center font-semibold  underline decoration-[#276ef1] hover:decoration-[#277ef1] hover:decoration-2  underline-offset-2"
+          >
+            <p className="font-bold tracking-wider ">Sign Out</p>
+          </button>
+        </div>
       </div>
       <div className="mx-auto w-full max-w-7xl px-5 py-16 md:px-10 md:py-24 lg:py-32">
         <p className="text-center text-sm font-bold uppercase">
@@ -115,61 +125,59 @@ function Account() {
           most correct measure of determining total health.
         </p>
         <div className="grid items-center gap-8 lg:grid-cols-2 lg:gap-12">
-          <div className="flex h-full flex-col [grid-area:2/1/3/2] lg:[grid-area:1/2/2/3]">
-            <a
-              className="mb-8 flex max-w-lg justify-center gap-4 rounded-xl border border-solid border-[#cdcdcd] px-6 py-5 text-[#222222]"
-              href="#w-tabs-0-data-w-pane-0"
-            >
+          <div className="flex h-full flex-col [grid-area:2/1/3/2] lg:[grid-area:1/2/2/3] rounded-xl border border-solid border-[#cdcdcd]">
+            {/* <div className="flex flex-col items-center justify-around">
+              <div className="flex h-10 w-10 flex-none items-center justify-center rounded-full bg-[#f2f2f7]">
+                <p className="text-sm font-bold sm:text-base">1</p>
+              </div>
+              <div className="flex h-10 w-10 flex-none items-center justify-center rounded-full bg-[#f2f2f7]">
+                <p className="text-sm font-bold sm:text-base">2</p>
+              </div>
+              <div className="flex h-10 w-10 flex-none items-center justify-center rounded-full bg-[#f2f2f7]">
+                <p className="text-sm font-bold sm:text-base">3</p>
+              </div>
+            </div> */}
+            {/* <div className="flex flex-col items-between"> */}
+            <div className=" flex justify-center gap-4 px-6 py-5 text-[#222222]">
               <div className="flex h-10 w-10 flex-none items-center justify-center rounded-full bg-[#f2f2f7]">
                 <p className="text-sm font-bold sm:text-base">1</p>
               </div>
               <div className="ml-4 flex flex-col gap-2">
                 <h5
-                // className={
-                //   result ? `text-xl font-bold ${colour}` : 'text-xl font-bold'
-                // }
+                  className={
+                    result
+                      ? `text-xl font-bold ${bmiInfo.colour}`
+                      : 'text-xl font-bold'
+                  }
                 >
-                  BMI Rating : {result && Math.round(result)}{' '}
+                  BMI Rating : {result && Math.round(result)} kg/m²
                 </h5>
-                <p className="text-sm text-[#636262]">
-                  Lorem ipsum dolor sit amet consectetur adipiscing elit ut
-                  aliquam, purus sit.
-                </p>
+                <p className="text-sm text-[#636262]"></p>
               </div>
-            </a>
-            <a
-              className="mb-8 flex max-w-lg justify-center gap-4 px-6 py-5 text-[#222222]"
-              href="#w-tabs-0-data-w-pane-1"
-            >
+            </div>
+            <div className=" flex  justify-center gap-4 px-6 py-5 text-[#222222]">
               <div className="flex h-10 w-10 flex-none items-center justify-center rounded-full bg-[#f2f2f7]">
                 <p className="text-sm font-bold sm:text-base">2</p>
               </div>
               <div className="ml-4 flex flex-col gap-2">
-                <h5 className="text-xl font-bold">
-                  {/* constant looping here, not sure why...maybe b/c function is called over and over */}
-                  Weight Classification:
-                </h5>
-                <p className="text-sm text-[#636262]">
-                  Lorem ipsum dolor sit amet consectetur adipiscing elit ut
-                  aliquam, purus sit.
+                <h5 className="text-xl font-bold">Weight Classification</h5>
+                <p className="text-md text-[#636262]">
+                  {result && bmiInfo.category}
                 </p>
               </div>
-            </a>
-            <a
-              className="mb-8 flex max-w-lg justify-center gap-4 px-6 py-5 text-[#222222]"
-              href="#w-tabs-0-data-w-pane-2"
-            >
+            </div>
+            <div className=" flex  justify-center gap-4 px-6 py-5 text-[#222222]">
               <div className="flex h-10 w-10 flex-none items-center justify-center rounded-full bg-[#f2f2f7]">
                 <p className="text-sm font-bold sm:text-base">3</p>
               </div>
               <div className="ml-4 flex flex-col gap-2">
                 <h5 className="text-xl font-bold">Description</h5>
                 <p className="text-sm text-[#636262]">
-                  Lorem ipsum dolor sit amet consectetur adipiscing elit ut
-                  aliquam, purus sit.
+                  {result && bmiInfo.info}
                 </p>
               </div>
-            </a>
+            </div>
+            {/* </div> */}
           </div>
           <div className="block w-auto h-auto md:h-full md:w-full overflow-hidden [grid-area:1/1/2/2] lg:[grid-area:1/1/2/2] rounded-xl border border-solid border-[#cdcdcd]">
             <form onSubmit={handleSubmitResult}>
@@ -213,18 +221,14 @@ function Account() {
             </form>
           </div>
         </div>
-        <div className="flex justify-center items-center text-sm py-4">
+        {/* <div className="flex justify-center items-center text-sm py-4">
           <button
             onClick={handleLogOut}
             className="flex items-center justify-center hover:bg-[#277ef1] bg-[#276ef1] px-8 py-4 text-center font-semibold rounded-md text-white"
           >
             <p className="font-bold tracking-wider ">Sign Out</p>
           </button>
-          {/* Log out of{' '}
-          <Link to="signin" className="text-sm font-bold text-balck">
-            Your Account
-          </Link> */}
-        </div>
+        </div> */}
       </div>
     </section>
   );
