@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { UserAuth } from '../context/AuthContext';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
+import ResultCard from './ResultCard';
 import React from 'react';
 
 function Account() {
@@ -9,7 +10,7 @@ function Account() {
   const [result, setResult] = useState('');
   const [inches, setInches] = useState('');
   const [standardUnit, setStandardUnit] = useState(true);
-  const [bmiInfo, setBmiInfo] = useState({});
+  // const [bmiInfo, setBmiInfo] = useState({});
 
   const { user, logout } = UserAuth();
 
@@ -53,72 +54,6 @@ function Account() {
     }
   };
 
-  const bmiResults = [
-    {
-      category: 'Under Weight',
-      colour: 'text-red-500',
-      info: 'You may be dealing with malnutrition, seek dietary assistance.',
-    },
-    {
-      category: 'Healthy Weight',
-      colour: 'text-green-500',
-      info: 'You are currently at a healthy weight, keep up the good work.',
-    },
-    {
-      category: 'Over Weight',
-      colour: 'text-orange-500',
-      info: 'You may need to seek guidance regarding small dietary adjustments.',
-    },
-    {
-      category: 'Obese',
-      colour: 'text-red-500',
-      info: 'You may need to seek medical support as your bmi level indicates a high risk of disease and health concerns.',
-    },
-  ];
-
-  //1. Once result has been returned e.g 20 bmi store that information
-  // result stored in state variable
-  //2. Create conditional statement comparing result to a range of numbers,
-  // if (result < 18.5 ) {
-  // setBmiInfo(bmiResults[0])
-  //      }
-  //3. Once info has been selected, display data on screen
-  // <h1>{bmiInfo.colour}</h1>
-
-  useEffect(() => {
-    const totalInfo = () => {
-      if (result < 18.5) {
-        return setBmiInfo(bmiResults[0]);
-      } else if (result >= 18.5 && result <= 24.9) {
-        return setBmiInfo(bmiResults[1]);
-      } else if (result >= 25 && result <= 29.9) {
-        return setBmiInfo(bmiResults[2]);
-      } else {
-        return setBmiInfo(bmiResults[3]);
-      }
-    };
-
-    console.log(bmiInfo.info);
-    console.log(result);
-    return () => {
-      totalInfo();
-    };
-  }, [result]);
-
-  //contiune here with finding out how to display data without constant re-renders
-
-  // colour condition for BMI range//
-  // let colour;
-  // if (result < 18.5) {
-  //   colour = 'text-red-500';
-  // } else if (result >= 18.5 && result <= 24.9) {
-  //   colour = 'text-green-500';
-  // } else if (result >= 25 && result <= 29.9) {
-  //   colour = 'text-orange-500';
-  // } else {
-  //   colour = 'text-red-500';
-  // }
-
   return (
     <section>
       <div className="flex justify-between">
@@ -148,60 +83,8 @@ function Account() {
           most correct measure of determining total health.
         </p>
         <div className="grid items-center gap-8 lg:grid-cols-2 lg:gap-12">
-          <div className="flex h-full flex-col [grid-area:2/1/3/2] lg:[grid-area:1/2/2/3] rounded-xl border border-solid border-[#cdcdcd]">
-            {/* <div className="flex flex-col items-center justify-around">
-              <div className="flex h-10 w-10 flex-none items-center justify-center rounded-full bg-[#f2f2f7]">
-                <p className="text-sm font-bold sm:text-base">1</p>
-              </div>
-              <div className="flex h-10 w-10 flex-none items-center justify-center rounded-full bg-[#f2f2f7]">
-                <p className="text-sm font-bold sm:text-base">2</p>
-              </div>
-              <div className="flex h-10 w-10 flex-none items-center justify-center rounded-full bg-[#f2f2f7]">
-                <p className="text-sm font-bold sm:text-base">3</p>
-              </div>
-            </div> */}
-            {/* <div className="flex flex-col items-between"> */}
-            <div className=" flex justify-center gap-4 px-6 py-5 text-[#222222]">
-              <div className="flex h-10 w-10 flex-none items-center justify-center rounded-full bg-[#f2f2f7]">
-                <p className="text-sm font-bold sm:text-base">1</p>
-              </div>
-              <div className="ml-4 flex flex-col gap-2">
-                <h5
-                  className={
-                    result
-                      ? `text-xl font-bold ${bmiInfo.colour}`
-                      : 'text-xl font-bold'
-                  }
-                >
-                  BMI Rating : {result && Math.round(result)} kg/m²
-                </h5>
-                <p className="text-sm text-[#636262]"></p>
-              </div>
-            </div>
-            <div className=" flex  justify-center gap-4 px-6 py-5 text-[#222222]">
-              <div className="flex h-10 w-10 flex-none items-center justify-center rounded-full bg-[#f2f2f7]">
-                <p className="text-sm font-bold sm:text-base">2</p>
-              </div>
-              <div className="ml-4 flex flex-col gap-2">
-                <h5 className="text-xl font-bold">Weight Classification</h5>
-                <p className="text-md text-[#636262]">
-                  {result && bmiInfo.category}
-                </p>
-              </div>
-            </div>
-            <div className=" flex  justify-center gap-4 px-6 py-5 text-[#222222]">
-              <div className="flex h-10 w-10 flex-none items-center justify-center rounded-full bg-[#f2f2f7]">
-                <p className="text-sm font-bold sm:text-base">3</p>
-              </div>
-              <div className="ml-4 flex flex-col gap-2">
-                <h5 className="text-xl font-bold">Description</h5>
-                <p className="text-sm text-[#636262]">
-                  {result && bmiInfo.info}
-                </p>
-              </div>
-            </div>
-            {/* </div> */}
-          </div>
+          <ResultCard result={result} />
+
           <div className="relative block w-auto h-auto md:h-full md:w-full overflow-hidden [grid-area:1/1/2/2] lg:[grid-area:1/1/2/2] rounded-xl border border-solid border-[#cdcdcd]">
             <button
               onClick={handleUnitSwitch}
@@ -219,6 +102,7 @@ function Account() {
                   onChange={(e) => setWeight(e.target.value)}
                   value={weight}
                   step=".1"
+                  autoComplete="off"
                   type="number"
                   placeholder="input weight here"
                   required
@@ -233,6 +117,7 @@ function Account() {
                     className=" mb-4 block h-9 w-full border border-black bg-[#f2f2f7] px-3 py-6 pl-14 text-sm text-[#333333]"
                     onChange={(e) => setHeight(e.target.value)}
                     value={height}
+                    autoComplete="off"
                     step=".01"
                     type="number"
                     placeholder="input height here"
@@ -245,6 +130,7 @@ function Account() {
                       onChange={(e) => setHeight(e.target.value)}
                       value={height}
                       maxLength="10"
+                      autoComplete="off"
                       step=".01"
                       type="number"
                       placeholder="input feet here"
@@ -254,6 +140,7 @@ function Account() {
                       className=" mb-4 block h-9 w-full border border-black bg-[#f2f2f7] px-3 py-6 pl-14 text-sm text-[#333333]"
                       onChange={(e) => setInches(e.target.value)}
                       value={inches}
+                      autoComplete="off"
                       step=".01"
                       type="number"
                       placeholder="input inches here"
