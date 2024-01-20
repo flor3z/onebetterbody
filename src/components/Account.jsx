@@ -92,7 +92,7 @@ function Account() {
             >
               {standardUnit ? <span>Standard</span> : <span>Metric</span>}
             </button>
-            <form onSubmit={handleSubmitResult}>
+            <form autoComplete="off" onSubmit={handleSubmitResult}>
               <div className="flex flex-col items-start p-4">
                 <label>
                   {standardUnit ? 'Weight in Kilograms' : 'Weight in Pounds'}
