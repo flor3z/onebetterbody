@@ -49,11 +49,11 @@ function Signup() {
             </div>
           </div>
           <div className="flex flex-col items-center justify-center bg-[#f2f2f7]">
-            <div className="max-w-lg px-5 py-12 text-center md:px-10 md:py-24 lg:py-32">
-              <div className="flex justify-center mb-16">
+            <div className=" max-w-lg px-5 py-12 text-center md:px-10 md:py-24 lg:py-32">
+              <div className="flex justify-center mb-28">
                 <button
                   onClick={() => setShow(!show)}
-                  className="flex items-center justify-center  w-50 h-12 bg-[#276ef1] px-8 py-4 text-center font-semibold rounded-md text-white transition [box-shadow:rgb(171,_196,_245)_-8px_8px] hover:[box-shadow:rgb(171,_196,_245)_0px_0px]"
+                  className="flex items-center justify-center w-50 h-12 bg-[#276ef1] px-8 py-4 text-center font-semibold rounded-md text-white transition [box-shadow:rgb(171,_196,_245)_-8px_8px] hover:[box-shadow:rgb(171,_196,_245)_0px_0px]"
                 >
                   <p className="font-bold tracking-wider">
                     {show ? 'Hide' : 'Guest Login'}
@@ -61,16 +61,22 @@ function Signup() {
                 </button>
                 <br />
               </div>
-              <div className="flex flex-col items-center pb-10">
+              <div className="relative flex justify-center items-center pb-10 font-semibold tracking-wider">
                 {show ? (
-                  <p className="flex flex-col items-center w-auto">
-                    email: test@test.com
+                  <p
+                    className={
+                      show
+                        ? 'absolute items-center -mt-20 animate-fade-down'
+                        : null
+                    }
+                  >
+                    E-mail: <span className="font-light">test@test.com</span>
                     <br />
-                    password: onebody
+                    Password: <span className="font-light">onebody</span>
                   </p>
                 ) : null}
               </div>
-              <h2 className="mb-8 text-4xl font-bold md:mb-12 md:text-5xl">
+              <h2 className="mb-8 mt-8 text-4xl font-bold md:mb-12 md:text-5xl">
                 One Body
               </h2>
               <form
