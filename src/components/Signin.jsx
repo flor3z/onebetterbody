@@ -26,7 +26,7 @@ function Signin() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center bg-[#f2f2f7] h-screen">
+    <div className="flex flex-col items-center justify-center bg-[#f2f2f7] dark:bg-neutral-800 h-screen">
       <div className="max-w-7xl px-5 py-16 text-center md:px-10 md:py-24 lg:py-32">
         <div className="flex justify-center mb-28">
           <button
@@ -43,7 +43,9 @@ function Signin() {
           {show ? (
             <p
               className={
-                show ? 'absolute   items-center -mt-20 animate-fade-down' : null
+                show
+                  ? 'absolute items-center -mt-20 animate-fade-down dark:text-slate-200'
+                  : null
               }
             >
               E-mail: <span className="font-light">test@test.com</span>
@@ -52,7 +54,7 @@ function Signin() {
             </p>
           ) : null}
         </div>
-        <h2 className="mb-8 text-3xl font-bold md:mb-12 md:text-5xl">
+        <h2 className="mb-8 text-3xl font-bold md:mb-12 md:text-5xl dark:text-slate-200">
           One Body
         </h2>
         <form
@@ -87,7 +89,7 @@ function Signin() {
               onChange={(e) => setPassword(e.target.value)}
               type="password"
               className="mb-4 block h-9 w-full border border-black bg-[#f2f2f7] px-3 py-6 pl-14 text-sm text-[#333333]"
-              placeholder="Password (min 4 characters)"
+              placeholder="Password (min 6 characters)"
               required=""
             />
           </div>
@@ -113,9 +115,12 @@ function Signin() {
             </button>
           </div>
         </form>
-        <p className="text-sm text-[#636262]">
+        <p className="text-sm text-[#636262] dark:text-gray-400">
           Dont have an account?{' '}
-          <Link to="/" className="text-sm font-bold text-black">
+          <Link
+            to="/"
+            className="text-sm font-bold text-black dark:text-slate-200"
+          >
             Sign up
           </Link>
         </p>

@@ -10,7 +10,6 @@ function Account() {
   const [result, setResult] = useState('');
   const [inches, setInches] = useState('');
   const [standardUnit, setStandardUnit] = useState(true);
-  // const [bmiInfo, setBmiInfo] = useState({});
 
   const { user, logout } = UserAuth();
 
@@ -38,12 +37,12 @@ function Account() {
       setWeight('');
     } else {
       const kilosIntoPounds = weight / 2.205;
-      const heightIntoMeters = height * 0.3048;
-      const heightTotal = heightIntoMeters + inches * 0.0254;
+      const feetIntoMeters = height * 0.3048;
+      const heightTotal = feetIntoMeters + inches * 0.0254;
       const metricHeightSquard = heightTotal * heightTotal;
       console.log(
         kilosIntoPounds,
-        heightIntoMeters,
+        feetIntoMeters,
         heightTotal,
         metricHeightSquard
       );
@@ -55,37 +54,39 @@ function Account() {
   };
 
   return (
-    <section>
+    <section className="bg-white dark:bg-neutral-800">
       <div className="flex justify-between">
-        <div className="py-4 text-black font-bold pl-5 sm:pl-10 underline decoration-[#276ef1] hover:decoration-[#277ef1] hover:decoration-2  underline-offset-2 ">
+        <div className="py-2 text-black font-bold pl-5 sm:pl-10 underline decoration-[#276ef1] hover:decoration-[#277ef1] hover:decoration-2 underline-offset-2 dark:text-slate-200">
           User: {user && user.email}
         </div>
-        <div className="flex justify-center items-center py-4 pr-5 sm:pr-10">
+        <div className="flex justify-center items-center py-2 pr-5 sm:pr-10">
           <button
             onClick={handleLogOut}
             className="flex text-black items-center justify-center text-center underline decoration-[#276ef1] hover:decoration-[#277ef1] hover:decoration-2  underline-offset-2"
           >
-            <p className="font-bold tracking-wider ">Sign Out</p>
+            <p className="font-bold tracking-wider dark:text-slate-200">
+              Sign Out
+            </p>
           </button>
         </div>
       </div>
-      <div className="mx-auto w-full max-w-7xl px-5 py-16 md:px-10 md:py-24 lg:py-32">
+      <div className="mx-auto w-full max-w-7xl px-5 py-16 md:px-10 md:py-24 lg:py-32 dark:text-slate-200">
         <p className="text-center text-sm font-bold uppercase">
           BMI CALCULATOR
         </p>
-        <h2 className="text-center text-3xl font-bold md:text-5xl">
+        <h2 className="text-center text-3xl font-bold md:text-5xl dark:text-[#2796f1]">
           How it works
         </h2>
-        <p className="mx-auto mb-8 mt-4 max-w-lg text-center text-sm text-[#636262] sm:text-base md:mb-12 lg:mb-16">
+        <p className="mx-auto mb-8 mt-4 max-w-lg text-center text-sm text-[#636262] sm:text-base md:mb-12 lg:mb-16 dark:text-neutral-300">
           One measure of good health would be your BMI score. Falling within the
           healthy range is a good indication of over-all wellness. Keep in mind
-          these results are based off of averages and may not be an exact the
-          most correct measure of determining total health.
+          these results are based off of averages and may not be an optimal
+          measure of determining total health.
         </p>
         <div className="grid items-center gap-8 lg:grid-cols-2 lg:gap-12">
           <ResultCard result={result} />
 
-          <div className="relative block w-auto h-auto md:h-full md:w-full overflow-hidden [grid-area:1/1/2/2] lg:[grid-area:1/1/2/2] rounded-xl border border-solid border-[#cdcdcd]">
+          <div className="relative block w-auto h-auto md:h-full md:w-full overflow-hidden [grid-area:1/1/2/2] lg:[grid-area:1/1/2/2] rounded-xl border border-solid border-[#cdcdcd] dark:border-gray-500">
             <button
               onClick={handleUnitSwitch}
               className="absolute top-3 right-4 font-bold underline decoration-[#276ef1] hover:decoration-[#277ef1] hover:decoration-2  underline-offset-2"
@@ -98,13 +99,13 @@ function Account() {
                   {standardUnit ? 'Weight in Kilograms' : 'Weight in Pounds'}
                 </label>
                 <input
-                  className="mb-4 block h-9 w-full border border-black bg-[#f2f2f7] px-3 py-6 pl-14 text-sm text-[#333333]"
+                  className="mb-4 block h-9 w-full border border-black bg-[#f2f2f7] dark:bg-neutral-200 px-3 py-6 pl-14 text-sm text-[#333333]"
                   onChange={(e) => setWeight(e.target.value)}
                   value={weight}
                   step=".1"
                   autoComplete="off"
                   type="number"
-                  placeholder="input weight here"
+                  placeholder="Input weight here"
                   required
                 />
                 <label>
@@ -114,36 +115,38 @@ function Account() {
                 </label>
                 {standardUnit ? (
                   <input
-                    className=" mb-4 block h-9 w-full border border-black bg-[#f2f2f7] px-3 py-6 pl-14 text-sm text-[#333333]"
+                    className=" mb-4 block h-9 w-full border border-black bg-[#f2f2f7] dark:bg-neutral-200 px-3 py-6 pl-14 text-sm text-[#333333]"
                     onChange={(e) => setHeight(e.target.value)}
                     value={height}
+                    maxLength="10"
                     autoComplete="off"
                     step=".01"
                     type="number"
-                    placeholder="input height here"
+                    placeholder="Input height here"
                     required
                   />
                 ) : (
                   <>
                     <input
-                      className=" mb-4 block h-9 w-full border border-black bg-[#f2f2f7] px-3 py-6 pl-14 text-sm text-[#333333]"
+                      className=" mb-4 block h-9 w-full border border-black bg-[#f2f2f7] dark:bg-neutral-200 px-3 py-6 pl-14 text-sm text-[#333333]"
                       onChange={(e) => setHeight(e.target.value)}
                       value={height}
                       maxLength="10"
                       autoComplete="off"
                       step=".01"
                       type="number"
-                      placeholder="input feet here"
+                      placeholder="Input feet here"
                       required
                     />
                     <input
-                      className=" mb-4 block h-9 w-full border border-black bg-[#f2f2f7] px-3 py-6 pl-14 text-sm text-[#333333]"
+                      className=" mb-4 block h-9 w-full border border-black bg-[#f2f2f7] dark:bg-neutral-200 px-3 py-6 pl-14 text-sm text-[#333333]"
                       onChange={(e) => setInches(e.target.value)}
                       value={inches}
+                      maxLength="10"
                       autoComplete="off"
                       step=".01"
                       type="number"
-                      placeholder="input inches here"
+                      placeholder="Input inches here"
                       required
                     />
                   </>
@@ -168,14 +171,6 @@ function Account() {
             </form>
           </div>
         </div>
-        {/* <div className="flex justify-center items-center text-sm py-4">
-          <button
-            onClick={handleLogOut}
-            className="flex items-center justify-center hover:bg-[#277ef1] bg-[#276ef1] px-8 py-4 text-center font-semibold rounded-md text-white"
-          >
-            <p className="font-bold tracking-wider ">Sign Out</p>
-          </button>
-        </div> */}
       </div>
     </section>
   );

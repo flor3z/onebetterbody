@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { UserAuth } from '../context/AuthContext';
+// import { ThemeContext } from '../context/ThemeContext';
 
 function Signup() {
   const [email, setEmail] = useState('');
@@ -10,6 +11,8 @@ function Signup() {
   const [show, setShow] = useState(false);
 
   const navigate = useNavigate();
+
+  // const [darkMode, setDarkMode] = useContext(ThemeContext);
 
   const { createUser } = UserAuth();
 
@@ -30,7 +33,13 @@ function Signup() {
     <>
       <section>
         <div className="grid h-screen md:h-screen md:grid-cols-2">
-          <div className="flex flex-col items-center justify-center bg-white">
+          {/* <span
+            onClick={() => setDarkMode(!darkMode)}
+            className="absolute top-4 right-4 bg-slate-400 p-2 rounded-md shadow-md hover:bg-slate-200 transition-all ease-out duration-200 cursor-pointer"
+          >
+            {darkMode ? <span>🌞</span> : <span>🌙</span>}
+          </span> */}
+          <div className="flex flex-col items-center justify-center bg-white dark:bg-neutral-700">
             <div className="max-w-lg px-5 py-5 md:px-10 md:py-24 lg:py-32">
               <div className="mb-4 ml-2 flex h-8 w-8  sm:h-14 sm:w-14 rounded-md items-center justify-center bg-[#276ef1] [box-shadow:rgb(171,_196,_245)_-8px_8px]">
                 <img
@@ -39,16 +48,18 @@ function Signup() {
                   className="inline-block h-5 w-5 sm:h-auto sm:w-auto"
                 />
               </div>
-              <p className="mb-6 text-[#647084] md:mb-12 lg:mb-16">
+              <p className="mb-6 text-[#647084] md:mb-12 lg:mb-16 dark:text-slate-200">
                 Stay connected with your account and check-in on your health
                 details. Keep in mind we have only one body and regular exercise
                 coupled with good nutrition leads to longevity.
               </p>
-              <p className="font-bold">One Body</p>
-              <p className="text-sm">Living a Life of Wellness</p>
+              <p className="font-bold dark:text-slate-200">One Body</p>
+              <p className="text-sm dark:text-slate-200">
+                Living a Life of Wellness
+              </p>
             </div>
           </div>
-          <div className="flex flex-col items-center justify-center bg-[#f2f2f7]">
+          <div className="flex flex-col items-center justify-center bg-[#f2f2f7] dark:bg-neutral-800">
             <div className=" max-w-lg px-5 py-12 text-center md:px-10 md:py-24 lg:py-32">
               <div className="flex justify-center mb-28">
                 <button
@@ -66,7 +77,7 @@ function Signup() {
                   <p
                     className={
                       show
-                        ? 'absolute items-center -mt-20 animate-fade-down'
+                        ? 'absolute items-center -mt-20 animate-fade-down dark:text-slate-200'
                         : null
                     }
                   >
@@ -76,7 +87,7 @@ function Signup() {
                   </p>
                 ) : null}
               </div>
-              <h2 className="mb-8 mt-8 text-4xl font-bold md:mb-12 md:text-5xl">
+              <h2 className="mb-8 mt-8 text-4xl font-bold md:mb-12 md:text-5xl dark:text-slate-200">
                 One Body
               </h2>
               <form
@@ -141,9 +152,12 @@ function Signup() {
                   </button>
                 </div>
               </form>
-              <p className="text-sm text-[#636262]">
+              <p className="text-sm text-[#636262] dark:text-gray-400">
                 Already have an account?{' '}
-                <Link to="/signin" className="text-sm font-bold text-black">
+                <Link
+                  to="/signin"
+                  className="text-sm font-bold text-black dark:text-slate-200"
+                >
                   Login now
                 </Link>
               </p>
