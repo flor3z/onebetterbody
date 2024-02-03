@@ -18,7 +18,7 @@ function Account() {
   const handleLogOut = async () => {
     try {
       await logout();
-      navigate('/signin');
+      navigate('/');
     } catch (e) {
       console.log(e.message);
     }
@@ -70,12 +70,12 @@ function Account() {
           </button>
         </div>
       </div>
-      <div className="mx-auto w-full max-w-7xl px-5 py-16 md:px-10 md:py-24 lg:py-32 dark:text-slate-200">
-        <p className="text-center text-sm font-bold uppercase">
+      <div className="mx-auto w-full max-w-7xl px-5 py-16 md:px-10 md:py-24 lg:py-32  dark:text-slate-200">
+        <p className="text-center text-md font-bold uppercase text-[#2b2b2b] dark:text-[#ffffff] tracking-wide">
           BMI CALCULATOR
         </p>
-        <h2 className="text-center text-3xl font-bold md:text-5xl dark:text-[#2796f1]">
-          How it works
+        <h2 className="text-center text-3xl py-3 font-bold md:text-5xl text-[#2796f1]">
+          How it Works
         </h2>
         <p className="mx-auto mb-8 mt-4 max-w-lg text-center text-sm text-[#636262] sm:text-base md:mb-12 lg:mb-16 dark:text-neutral-300">
           One measure of good health would be your BMI score. Falling within the
@@ -86,7 +86,7 @@ function Account() {
         <div className="grid items-center gap-8 lg:grid-cols-2 lg:gap-12">
           <ResultCard result={result} />
 
-          <div className="relative block w-auto h-auto md:h-full md:w-full overflow-hidden [grid-area:1/1/2/2] lg:[grid-area:1/1/2/2] rounded-xl border border-solid border-[#cdcdcd] dark:border-gray-500">
+          <div className="relative block w-auto h-auto md:h-full md:w-full overflow-hidden [grid-area:1/1/2/2] lg:[grid-area:1/1/2/2] dark:bg-[#313132] bg-[#fdfdfd] rounded-xl border border-solid border-gray-200 dark:border-zinc-600 shadow-lg shadow-gray-500 hover:shadow-sm transition-all ease-out duration-100">
             <button
               onClick={handleUnitSwitch}
               className="absolute top-3 right-4 font-bold underline decoration-[#276ef1] hover:decoration-[#277ef1] hover:decoration-2  underline-offset-2"

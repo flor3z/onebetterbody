@@ -118,7 +118,7 @@ function Signin() {
         <p className="text-sm text-[#636262] dark:text-gray-400">
           Dont have an account?{' '}
           <Link
-            to="/"
+            to="/signup"
             className="text-sm font-bold text-black dark:text-slate-200"
           >
             Sign up

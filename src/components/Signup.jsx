@@ -1,18 +1,17 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { UserAuth } from '../context/AuthContext';
-// import { ThemeContext } from '../context/ThemeContext';
+// import { UserContext } from '../context/AuthContext';
 
 function Signup() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-  const [show, setShow] = useState(false);
 
   const navigate = useNavigate();
 
-  // const [darkMode, setDarkMode] = useContext(ThemeContext);
+  // const { createUser } = useContext(UserContext);
 
   const { createUser } = UserAuth();
 
@@ -61,32 +60,6 @@ function Signup() {
           </div>
           <div className="flex flex-col items-center justify-center bg-[#f2f2f7] dark:bg-neutral-800">
             <div className=" max-w-lg px-5 py-12 text-center md:px-10 md:py-24 lg:py-32">
-              <div className="flex justify-center mb-28">
-                <button
-                  onClick={() => setShow(!show)}
-                  className="flex items-center justify-center w-50 h-12 bg-[#276ef1] px-8 py-4 text-center font-semibold rounded-md text-white transition [box-shadow:rgb(171,_196,_245)_-8px_8px] hover:[box-shadow:rgb(171,_196,_245)_0px_0px]"
-                >
-                  <p className="font-bold tracking-wider">
-                    {show ? 'Hide' : 'Guest Login'}
-                  </p>
-                </button>
-                <br />
-              </div>
-              <div className="relative flex justify-center items-center pb-10 font-semibold tracking-wider">
-                {show ? (
-                  <p
-                    className={
-                      show
-                        ? 'absolute items-center -mt-20 animate-fade-down dark:text-slate-200'
-                        : null
-                    }
-                  >
-                    E-mail: <span className="font-light">test@test.com</span>
-                    <br />
-                    Password: <span className="font-light">onebody</span>
-                  </p>
-                ) : null}
-              </div>
               <h2 className="mb-8 mt-8 text-4xl font-bold md:mb-12 md:text-5xl dark:text-slate-200">
                 One Body
               </h2>
@@ -155,7 +128,7 @@ function Signup() {
               <p className="text-sm text-[#636262] dark:text-gray-400">
                 Already have an account?{' '}
                 <Link
-                  to="/signin"
+                  to="/"
                   className="text-sm font-bold text-black dark:text-slate-200"
                 >
                   Login now

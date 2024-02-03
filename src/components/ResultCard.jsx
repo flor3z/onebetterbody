@@ -42,7 +42,7 @@ function ResultCard({ result }) {
   console.log(result);
 
   return (
-    <div className="flex h-full flex-col rounded-xl border border-solid border-[#cdcdcd] dark:border-gray-500 ">
+    <div className="flex h-full flex-col rounded-xl dark:bg-[#313132] bg-[#fdfdfd] border border-solid border-gray-100 dark:border-zinc-600 shadow-lg shadow-gray-500 hover:shadow-sm transition-all ease-out duration-100 ">
       <div className="flex justify-start gap-4 px-6 py-5 text-[#222222]">
         <div className="flex h-10 w-10 flex-none items-center justify-center rounded-full bg-[#f2f2f7] dark:bg-neutral-300">
           <p className="text-sm font-bold sm:text-base">1</p>
