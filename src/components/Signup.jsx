@@ -2,7 +2,9 @@ import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { UserAuth } from '../context/AuthContext';
-// import { UserContext } from '../context/AuthContext';
+import { ThemeContext } from '../context/ThemeContext';
+import { useContext } from 'react';
+import ThemeButton from './ThemeButton';
 
 function Signup() {
   const [email, setEmail] = useState('');
@@ -11,7 +13,7 @@ function Signup() {
 
   const navigate = useNavigate();
 
-  // const { createUser } = useContext(UserContext);
+  const [darkMode] = useContext(ThemeContext);
 
   const { createUser } = UserAuth();
 
@@ -23,21 +25,15 @@ function Signup() {
       navigate('/account');
     } catch (error) {
       setError(error.message);
-      console.log(error.message);
       setEmail('');
       setPassword('');
     }
   };
   return (
     <>
-      <section>
+      <section className={darkMode ? 'dark' : ''}>
         <div className="grid h-screen md:h-screen md:grid-cols-2">
-          {/* <span
-            onClick={() => setDarkMode(!darkMode)}
-            className="absolute top-4 right-4 bg-slate-400 p-2 rounded-md shadow-md hover:bg-slate-200 transition-all ease-out duration-200 cursor-pointer"
-          >
-            {darkMode ? <span>🌞</span> : <span>🌙</span>}
-          </span> */}
+          <ThemeButton />
           <div className="flex flex-col items-center justify-center bg-white dark:bg-neutral-700">
             <div className="max-w-lg px-5 py-5 md:px-10 md:py-24 lg:py-32">
               <div className="mb-4 ml-2 flex h-8 w-8  sm:h-14 sm:w-14 rounded-md items-center justify-center bg-[#276ef1] [box-shadow:rgb(171,_196,_245)_-8px_8px]">

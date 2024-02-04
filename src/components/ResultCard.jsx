@@ -19,7 +19,7 @@ const bmiResults = [
   {
     category: 'Obese',
     colour: 'text-red-500',
-    info: 'You may need to seek medical support as your bmi level indicates a high risk of disease and health concerns.',
+    info: 'You may need to seek medical support as your bmi level indicates a high risk of health concerns.',
   },
 ];
 
@@ -35,11 +35,6 @@ function ResultCard({ result }) {
   } else if (result >= 30) {
     display = bmiResults[3];
   }
-
-  // [grid-area:2/1/3/2] lg:[grid-area:1/2/2/3]
-
-  console.log(display);
-  console.log(result);
 
   return (
     <div className="flex h-full flex-col rounded-xl dark:bg-[#313132] bg-[#fdfdfd] border border-solid border-gray-100 dark:border-zinc-600 shadow-lg shadow-gray-500 hover:shadow-sm transition-all ease-out duration-100 ">
