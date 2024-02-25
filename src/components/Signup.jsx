@@ -74,6 +74,7 @@ function Signup() {
                   <input
                     onChange={(e) => setEmail(e.target.value)}
                     type="email"
+                    value={email || ''}
                     className="mb-4 block h-9 w-full border border-black bg-[#f2f2f7] px-3 py-6 pl-14 text-sm text-[#333333]"
                     maxLength="256"
                     name="name"
@@ -90,6 +91,7 @@ function Signup() {
                   <input
                     onChange={(e) => setPassword(e.target.value)}
                     type="password"
+                    value={password || ''}
                     className="mb-4 block h-9 w-full border border-black bg-[#f2f2f7] px-3 py-6 pl-14 text-sm text-[#333333]"
                     placeholder="Password (min 6 characters)"
                     required=""

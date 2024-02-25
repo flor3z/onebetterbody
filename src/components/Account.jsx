@@ -54,7 +54,7 @@ function Account() {
 
   return (
     <div className={darkMode ? 'dark' : ''}>
-      <section className="bg-white dark:bg-neutral-800">
+      <section className="bg-white dark:bg-neutral-800 h-full lg:h-screen">
         <ThemeButton />
         <div className="flex justify-between">
           <div className="py-2 text-black font-bold pl-5 sm:pl-10 underline decoration-[#276ef1] hover:decoration-[#277ef1] hover:decoration-2 underline-offset-2 dark:text-slate-200">
@@ -81,8 +81,8 @@ function Account() {
           <p className="mx-auto mb-8 mt-4 max-w-lg text-center text-sm text-[#636262] sm:text-base md:mb-12 lg:mb-16 dark:text-neutral-300">
             One measure of good health would be your BMI score. Falling within
             the healthy range is a good indication of over-all wellness. Keep in
-            mind these results are based off of averages and may not be an
-            optimal measure of determining total health.
+            mind these results are based off averages and may not be an optimal
+            measure of determining total health.
           </p>
           <div className="grid items-center gap-8 lg:grid-cols-2 lg:gap-12">
             <ResultCard result={result} />
@@ -153,10 +153,7 @@ function Account() {
                     </>
                   )}
 
-                  <button
-                    href="#"
-                    className="flex items-center justify-center hover:bg-[#277ef1] bg-[#276ef1] px-8 py-4 text-center font-semibold rounded-md text-white"
-                  >
+                  <button className="flex items-center justify-center hover:bg-[#277ef1] bg-[#276ef1] px-8 py-4 text-center font-semibold rounded-md text-white">
                     <p className="mr-6 font-bold tracking-wider">Submit</p>
                     <svg
                       className="h-4 w-4 flex-none"
